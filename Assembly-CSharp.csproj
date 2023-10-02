@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\NewGame.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\AIChase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
