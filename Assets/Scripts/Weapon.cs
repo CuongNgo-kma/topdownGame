@@ -7,20 +7,18 @@ public class Weapon : MonoBehaviour
     // Start is called before the first frame update
 
 
-    // Update is called once per frame
-    public GameObject bullet;
-    public Transform firePos;
-    public float TimeBtwFire = 0.2f;
-    public float bulletForce;
-    private float timeBtwFire;
-    public GameObject muzzle;
+
+
+    public Transform bulletSpawnPointl;
+    public GameObject bulletPrefabs;
+    public float bulletSpeed;
+
     void Update()
     {
         RotateGun();
-        timeBtwFire = -Time.deltaTime;
-        if (Input.GetMouseButton(0)&&timeBtwFire<0)
+        if (Input.GetMouseButtonDown(0))
         {
-            FireBullet();
+            Fire();
         }
 
     }
@@ -41,15 +39,18 @@ public class Weapon : MonoBehaviour
 
         }
     }
-    void FireBullet()
+    void Fire()
     {
-        timeBtwFire = TimeBtwFire;
-        GameObject bulletTmp = Instantiate(bullet, firePos.position, Quaternion.identity);
+        // Lấy hướng từ vũ khí đến vị trí chuột
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 direction = (mousePosition - transform.position).normalized;
 
-        Instantiate(muzzle, firePos.position, transform.rotation, transform);
-        Rigidbody2D rb = bulletTmp.GetComponent<Rigidbody2D>();
-        rb.AddForce(transform.right * bulletForce, ForceMode2D.Impulse);
-         
+        // Tạo thể hiện đạn và đặt vận tốc
+        var bullet = Instantiate(bulletPrefabs, bulletSpawnPointl.position, bulletSpawnPointl.rotation);
+        bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
+
+     
     }
+
 
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - treasue
+  - Enemy
   layers:
   - Default
   - TransparentFX
